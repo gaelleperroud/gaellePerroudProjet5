@@ -1,0 +1,35 @@
+h1{
+    font-family: "Caveat Brush", cursive;
+}
+
+body{
+    font-family: "roboto", sans-serif;
+}
+
+a{
+    color: #343A40;
+}
+
+a:hover {
+    color: #343A40;
+    border-bottom: 1px solid #343A40;
+    text-decoration: none;
+}
+
+.list-group-item{
+    border: none;
+}
+
+.card{
+    border: 4px #007bff  solid;
+    border-radius: 25px;
+}
+
+.list-group-item{
+    background-color: #343a40;
+    color: #fff;
+}
+
+.list-group-item a{
+    color: #fff;
+}
