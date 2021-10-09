@@ -12,17 +12,15 @@ a{
 
 a:hover {
     color: #343A40;
-    border-bottom: 1px solid #343A40;
     text-decoration: none;
+}
+
+.nav-item:hover{
+    text-decoration: underline;
 }
 
 .list-group-item{
     border: none;
-}
-
-.card{
-    border: 4px #007bff  solid;
-    border-radius: 25px;
 }
 
 .list-group-item{
@@ -32,4 +30,38 @@ a:hover {
 
 .list-group-item a{
     color: #fff;
+}
+
+.cameraCard{
+    margin: 35px auto;
+    width: 85%;
+    height: 420px;
+    border: 4px #007bff  solid;
+    border-radius: 25px; 
+}
+
+.cameraCard img{
+    height: 350px;
+    
+    border-radius: 20px 20px 0 0;   
+}
+
+.cameraCard button{
+    border-radius: 40px;
+    margin-top: 10px; 
+    height: 40px;
+    min-width: 135px;   
+}
+
+.cameraCard h2{
+    margin-top: 10px;
+}
+
+.cameraCard h2:hover{
+    text-decoration: underline;
+}
+
+.cameraCard a{
+    width: 100%;
+    padding-left: 15px;
 }
