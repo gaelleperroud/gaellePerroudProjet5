@@ -23,6 +23,15 @@ function displayCart(camera){
     price.textContent = camera.cameraPrice / 100 + " €";
     let qty = document.createElement("p");
     qty.textContent = "quantité : " + camera.cameraCount;
+    let addButton = document.createElement("button")
+    addButton.textContent = "+";
+    addButton.addEventListener("click", function(){
+        if (camera.cameraCount > 1){
+            camera.cameraCount++;
+            qty.textContent = "quantité : " + camera.cameraCount;
+            console.log(localStorage);
+        }
+    });
     let totalPriceForDifferentItem = (camera.cameraPrice /100) * camera.cameraCount;
     let totalPrice = document.createElement("p");
     totalPrice.textContent = "Prix total : " + totalPriceForDifferentItem + " €";
