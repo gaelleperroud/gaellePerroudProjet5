@@ -1,0 +1,10 @@
+#imageHere{
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
+
+section {
+    margin: 25px auto;
+    width: 90%;
+}
