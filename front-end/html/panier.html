@@ -51,29 +51,34 @@
       </section>
 
       <section id="formulaire">
-        <form method="post" action="form.php">
+        <form>
           <div class="champ">
             <label for="lastName">Nom de famille : </label>
             <input type="text" id="lastName" name="lastName" placeholder="Kent" required>
+            <span class="validity row">* Champ requis. Ne doit pas contenir de chiffres</span>
           </div>
           <div class="champ">
             <label for="firstName">Prénom :</label>
             <input type="text" id="firstName" name="firstName" placeholder="Clark" required>
+            <span class="validity row">* Champ requis. Ne doit pas contenir de chiffres</span>
           </div>
           <div class="champ">
             <label for="email">Adresse mail :</label>
             <input type="email" id="email" name="email" placeholder="superman@krypton.com" required>
+            <span class="validity row">* Champ requis. Doit être au format abcd@exemple.xx</span>
           </div>
           <div class="champ">
             <label for="address">Adresse :</label>
             <input type="text" id="address" name="address" placeholder="344 Clinton Street" required>
+            <span class="validity row">* Champ requis. Peut contenir des chiffres et des lettres</span>
           </div>
           <div class="champ">
             <label for="city">Ville :</label>
             <input type="text" id="city" name="city" placeholder="Metropolis" required>
+            <span class="validity row">* Champ requis. Ne doit pas contenir de chiffres</span>
           </div>
           <div class="champ">
-            <input class ="rounded-pill bg-primary" type="submit" value="Passer la commande">
+            <input id="sendButton" class ="rounded-pill bg-primary" type="submit" value="Passer la commande">
            </div>
         </form>
       </section>

@@ -2,6 +2,8 @@ h2{
     margin: 25px auto;
 }
 
+
+
 .card{
     width: 85%;
     height: 100px;
@@ -10,4 +12,78 @@ h2{
 
 .champ{
     margin-bottom: 10px;
-  }
+}
+
+.validity{
+    margin: 2px auto 5px 1px;
+    font-size: .6rem;
+    color: #6c757d;
+    font-style: italic;
+
+}
+
+.card{
+    border: 4px #007bff  solid;
+    border-radius: 15px;
+    height: 120px;
+}
+
+.cardHeader{
+    margin-top: 10px;
+    margin-left: 1px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardLense{
+    margin-left: 2px;
+}
+
+.cardContent{
+    margin-top: -10px;
+    margin-left: 2px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalPricePerItem{
+    margin-right: 12px;
+    font-weight: 600;
+}
+
+.buttn{
+    background-color:lightgray;
+    border: 2px #007bff solid;
+    height: 25px;
+    width: 25px;
+    border-radius: 50px;
+    margin-left: 4px; 
+    line-height: 15px;  
+}
+
+.quantityDiv{
+    display: flex;
+}
+
+.quantityDiv p{
+    margin-right: 25px;
+}
+
+#cartTools{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 55px;
+}
+
+#cartTools p{
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+#formulaire{
+    margin: 10px 55px;
+}
+
+

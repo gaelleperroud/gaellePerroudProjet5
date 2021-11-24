@@ -1,0 +1,13 @@
+p{
+    margin: 60px auto;
+    text-align: center;
+}
+
+a{
+    color: #007bff;
+    text-decoration: underline;  
+}
+
+#homeButton{
+    text-align: center;
+}
