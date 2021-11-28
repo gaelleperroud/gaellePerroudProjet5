@@ -3,33 +3,16 @@ import { initStorage } from "./storage.js";
 import { sameItemInCart } from "./storage.js";
 import { addNewItemInCart } from "./storage.js";
 
-//--mise en place de l'objet cameraData qui sera réutilisé a plusieurs reprises-----
-let cameraName;
-let cameraPrice;
-let cameraId;
-let cameraCount = 1;
-let cameraLense = "non";
-let cameraData = {
-  cameraId,
-  cameraCount,
-  cameraLense,
-  cameraName,
-  cameraPrice,
-};
-
 //-----fonction asynchrone de requete a l'api----------------------------------
 async function loadCamera() {
-  const oneCamera = await getOneCamera();
-  displayOneCamera(oneCamera);
+  let url = new URL(window.location.href); //on recupere l'url de la page courante
+  let id = url.searchParams.get("id"); //puis son recupere l'id du produit depuis l'url
+  const oneCamera = await getOneCamera(id);
+  return oneCamera;
 }
-
 
 //------------fonction qui affiche les differents element de notre camera--------------
 function displayOneCamera(camera) {
-  cameraName = camera.name;
-  cameraPrice = camera.price;
-  cameraId = camera._id;
-  cameraData = { cameraId, cameraCount, cameraLense, cameraName, cameraPrice };
   let img = document.getElementById("imageHere");
   img.src = camera.imageUrl;
   let title = document.getElementById("nameHere");
@@ -41,7 +24,6 @@ function displayOneCamera(camera) {
   lensesDisplay(camera.lenses);
 }
 
-
 //----------------fonction qui va afficher les differentes lentilles a choisir -----------
 function lensesDisplay(lenses) {
   for (let lense of lenses) {
@@ -52,25 +34,29 @@ function lensesDisplay(lenses) {
   }
 }
 
-//----on ecoute l'evenement quand l'utilisateur choisi une lentille ----------------
-let lenseSelector = document.getElementById("lenseSelector");
-lenseSelector.addEventListener("change", function () {
-  cameraLense = this.value;
-  cameraData = { cameraId, cameraCount, cameraLense, cameraName, cameraPrice };
-  //et on modifie l'objet cameraData en conséquence
-});
-
 //------on écoute notre bouton d'ajout au panier ----------------
-let cartButton = document.getElementById("addToCart");
-cartButton.addEventListener("click", function () {
-  if (localStorage.length === 0) { //si le localStorage est vide on initie le localStorage
-    let cameraStorage = [cameraData];
-    initStorage(cameraStorage);
-  } else if (sameItemInCart(cameraData) == 1) {//si deux articles identiques,ajoute une quantité
+function addToCart(camera) {
+  camera.lense = document.getElementById("lenseSelector").value; 
+  camera.cameraCount = 1;
+  if (localStorage.length === 0) {
+    //si le localStorage est vide on initie le localStorage
+    initStorage([camera]);
+  } else if (sameItemInCart(camera) == 1) {
+    //si deux articles identiques,ajoute une quantité
     console.log("deux articles identiques");
-  } else {//sinon on ajoute un article au localStorage
-    addNewItemInCart(cameraData);
+  } else {
+    //sinon on ajoute un article au localStorage
+    addNewItemInCart(camera);
   }
-});
+}
 
-loadCamera();
+//-------------fonction principale.. -------------------------
+async function init() {
+  let oneCamera = await loadCamera();  //..qui va récuperer la requete a l'api
+  displayOneCamera(oneCamera);  //ensuite afficher le résultat a l'écran
+  document  //puis enfin écouter le bouton d'ajout au panier afin d'envoyer les produits
+    .getElementById("addToCart")  //dans le localStorage
+    .addEventListener("click", () => addToCart(oneCamera));                     
+}
+
+init();

@@ -6,6 +6,7 @@ export function validateName(input, field){
         return false;
     } else {
         field.style.borderColor = "green";
+        console.log("trueName");
         return true;
     }
 }
@@ -18,6 +19,7 @@ export function validateMail(input, field){
         return false;
     } else {
         field.style.borderColor = "green";
+        console.log("trueMail");
         return true;
     }
 }
@@ -30,6 +32,7 @@ export function validateAddress(input, field){
         return false;
     } else {
         field.style.borderColor = "green";
+        console.log("trueAddress");
         return true;
     }
 }

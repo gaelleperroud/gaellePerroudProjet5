@@ -12,8 +12,8 @@ export function sameItemInCart(data) {
     let cameraArray = JSON.parse(window.localStorage.getItem("camera"));
     for (let camera of cameraArray) {
       if (  //puis faire une boucle avec le tableau d'article et verifier si 
-        data.cameraId === camera.cameraId &&   //l'id et la lentille sont identiques
-        data.cameraLense === camera.cameraLense
+        data._id === camera._id &&   //l'id et la lentille sont identiques
+        data.lense === camera.lense
       ) {
         camera.cameraCount++;    //si oui on va ajouter une quantité 
         initStorage(cameraArray);   //et le renvoyer dans le localStorage
@@ -30,3 +30,8 @@ export function addNewItemInCart(data) {
     initStorage(cameraArray);  //on renvoie dans le localStorage
 }
 
+//--------------vider le localStorage et recharger la page------------------------------------
+export function cleanStorage(){
+    window.localStorage.clear();
+    window.location.reload();
+}

@@ -32,9 +32,8 @@ export function getAllCameras() {
 
 //---fonction qui envoie une requete au serveur d'une seule camera a afficher grace a son id--
 
-let url = new URL(window.location.href); //on recupere l'url de la page courante
-let id = url.searchParams.get("id"); //puis son recupere l'id du produit depuis l'url
-export function getOneCamera(){
+
+export function getOneCamera(id){
   return fetch ("http://localhost:3000/api/cameras/" + id)
   .then((res) =>{
     console.log(res);

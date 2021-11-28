@@ -1,7 +1,15 @@
 #imageHere{
     width: 100%;
     max-width: 900px;
-    margin: auto;
+    margin: 25px auto;
+}
+
+#priceHere{
+    font-weight: 800;
+}
+
+#addToCart{
+    margin-top: 20px;    
 }
 
 section {
