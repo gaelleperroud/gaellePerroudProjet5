@@ -25,7 +25,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/produit.css" />
+    <link rel="stylesheet" href="../css/accueil.css" />
 
     <title>OriCam</title>
   </head>
@@ -38,12 +38,13 @@
             <h1>OriCam</h1>
           </div>
 
-          <div class="col">
+          <div class="col" id="menu">
             <nav class="navbar navbar-expand">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                   <a class="nav-link active" href="accueil.html">Accueil</a>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link" href="panier.html">Panier</a>
                 </li>
@@ -53,22 +54,7 @@
         </div>
       </header>
 
-      <section>
-        <img id="imageHere" />
-        <h2 id="nameHere"></h2>
-        <p id="descriptionHere"></p>
-        <p id="priceHere"></p>
-        <div>
-          <!--selecteur de lentille-->
-          <label for="lenseSelector">Personnaliser la lentille:</label>
-          <select name="lense" id="lenseSelector">
-            <option value="non">Pas de lentille</option>
-          </select>
-        </div>
-        <button id="addToCart" class="btn btn-primary">
-          Ajouter au panier
-        </button>
-      </section>
+      <section id="mainContent"></section>
 
       <footer>
         <!-- footer comprenant 3 liens:aide,contact,sécurité-->
@@ -89,7 +75,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script type="module" src="../js/produit.js"></script>
+    <script type="module" src="../js/accueil.js"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

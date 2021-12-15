@@ -1,9 +1,6 @@
 import { Cart } from "./cart.js";
 import { sendOrder } from "./api.js";
 import { testForm } from "./regex.js";
-//import { validateMail } from "./regex.js";
-//import { validateAddress } from "./regex.js";
-import { Camera } from "./camera.js";
 
 function displayStorage() {
   if (localStorage.length === 0) {
@@ -37,36 +34,22 @@ function createTotalPrice() {
   document.getElementById("cartTools").appendChild(sum);
   let totalSum = Cart.getTotalValue();
   console.log(totalSum);
-  sum.textContent = "Montant du panier : " + totalSum +" €";
+  sum.innerHTML = "Montant du panier : " + totalSum + " €";
 }
 
-//---------------------fonction qui va enler un article de la quantité----------------
+//---fonction qui va enlever un article de la quantité et modifier l'affichage-----------
 function removeItem(camera, array) {
-  if (camera.cameraCount == 1) {
-    let index = array.indexOf(camera);
-    if (index > -1 && array.length > 1) {
-      array.splice(index, 1);
-      Cart.initCart(array);
-      window.location.reload();
-    } else if (index > -1 && array.length == 1) {
-      window.localStorage.clear();
-      window.location.reload();
-    }
-  } else {
-    camera.cameraCount--;
-    Cart.initCart(array);
-    updateCardBottom(camera, array);
-  }
-}
-
-//--------------------fonction qui va ajouter un article de la quantité-------------------
-function addItem(camera, array) {
-  camera.cameraCount++;
-  Cart.initCart(array);
+  Cart.removeItem(camera, array);
   updateCardBottom(camera, array);
 }
 
-//----fonction qui va modifier la quantité et le prix sur la carte affiché----------------
+//---fonction qui va ajouter un article de la quantité et modifier l'affichege-----------
+function addItem(camera, array) {
+  Cart.addQuantity(camera, array);
+  updateCardBottom(camera, array);
+}
+
+//----fonction qui va modifier la quantité et modifier l'affichage----------------
 function updateCardBottom(camera, array) {
   let quantity = document.getElementsByClassName("quantity");
   let price = document.getElementsByClassName("totalPricePerItem");
@@ -76,7 +59,6 @@ function updateCardBottom(camera, array) {
     "Prix total : " +
     Cart.formatedPrice(camera.price) * camera.cameraCount +
     " €";
-  //cartFinalSum(array);
 }
 
 //------------fonction qui crée une carte pour chaque camera du panier-------------------
@@ -93,7 +75,6 @@ function createCard() {
 //----fonction qui va créer le header de la carte avec le nom et le prix de la caméra--
 function createCardHeader(camera) {
   let cardHeader = document.createElement("div");
-  cardHeader.classList.add("row");
   cardHeader.classList.add("cardHeader");
   let title = document.createElement("h3");
   title.innerHTML = camera.name;
@@ -107,16 +88,14 @@ function createCardHeader(camera) {
 //----fonction qui va créer le milieu de la carte: la partie lentille personnalisée----
 function createCardLense(camera) {
   let selectedLense = document.createElement("p");
-  selectedLense.classList.add("row");
   selectedLense.classList.add("cardLense");
-  selectedLense.textContent = "lentille personnalisée : " + camera.lense;
+  selectedLense.innerHTML = "lentille personnalisée : " + camera.lense;
   return selectedLense;
 }
 
 //---fonction qui va créer le bas de la carte avec la quantité, les boutons et la somme----
 function createCardBottom(camera, array) {
   let cardContent = document.createElement("div");
-  cardContent.classList.add("row");
   cardContent.classList.add("cardContent");
   let quantityDiv = document.createElement("div");
   quantityDiv.classList.add("quantityDiv");
@@ -160,12 +139,10 @@ function displayCart(camera, array) {
 
 //-----------------fonction qui crée un bouton pour vider le panier------------------------
 function cleanCart() {
-  let div = document.createElement("div");
-  document.getElementById("cartTools").appendChild(div);
   let cleanButton = document.createElement("button");
+  document.getElementById("cartTools").appendChild(cleanButton);
   cleanButton.classList.add("bg-primary");
   cleanButton.textContent = "Vider le panier";
-  div.appendChild(cleanButton);
   cleanButton.addEventListener("click", () => Cart.cleanCart());
 }
 
@@ -181,7 +158,7 @@ async function receiveOrder(data) {
   window.localStorage.clear();
 }
 
-//----------fonction qui va créer l'objet contact---------------------
+//----------------------fonction qui va créer l'objet contact---------------------------
 function getFormData() {
   let lastName = document.getElementById("lastName").value;
   let firstName = document.getElementById("firstName").value;
@@ -193,7 +170,7 @@ function getFormData() {
 }
 
 //--fonction qui va tester les données du formulaire puis si elles sont valides--------
-//--------va créer les objets a envoyer puis envoyer les données a l'api
+//--------va créer les objets a envoyer puis envoyer les données a l'api---------------
 function activateSendButton() {
   let button = document.getElementById("sendButton");
   button.addEventListener("click", (e) => {
@@ -204,7 +181,7 @@ function activateSendButton() {
     } else {
       let contact = getFormData();
       let products = [];
-      let cart = new Cart;
+      let cart = new Cart();
       let storage = cart.getItems();
       storage.forEach((camera) => {
         let cameraIdToSend = camera._id;

@@ -34,7 +34,7 @@ function lensesDisplay(lenses) {
 
 //------on écoute notre bouton d'ajout au panier ----------------
 function addToCart(camera) {
-  camera.lense = document.getElementById("lenseSelector").value; 
+  camera.lense = document.getElementById("lenseSelector").value;
   camera.cameraCount = 1;
   if (localStorage.length === 0) {
     //si le localStorage est vide on initie le localStorage
@@ -50,11 +50,11 @@ function addToCart(camera) {
 
 //-------------fonction principale.. -------------------------
 async function init() {
-  let oneCamera = await loadCamera();  //..qui va récuperer la requete a l'api
-  displayOneCamera(oneCamera);  //ensuite afficher le résultat a l'écran
-  document  //puis enfin écouter le bouton d'ajout au panier afin d'envoyer les produits
-    .getElementById("addToCart")  //dans le localStorage
-    .addEventListener("click", () => addToCart(oneCamera));                     
+  let oneCamera = await loadCamera(); //on récuperele resultat de la requete a l'api
+  displayOneCamera(oneCamera); //ensuite afficher le résultat a l'écran
+  document //puis enfin écouter le bouton d'ajout au panier afin d'envoyer les produits
+    .getElementById("addToCart") //dans le localStorage
+    .addEventListener("click", () => addToCart(oneCamera));
 }
 
 init();

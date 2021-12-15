@@ -1,0 +1,55 @@
+.cameraCard {
+  margin: 35px auto;
+  border: 4px #007bff solid;
+  border-radius: 25px;
+  max-width: 500px;
+}
+
+.cameraCard img {
+  height: 250px;
+  border-radius: 20px 20px 0 0;
+}
+
+.cameraCard button {
+  border-radius: 40px;
+  min-width: 135px;
+  margin: 5px auto 10px auto;
+}
+
+.cameraCard h2 {
+  margin: 5px auto;
+}
+
+.cameraCard h2:hover {
+  text-decoration: underline;
+}
+
+.cameraCard a {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  #mainContent {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .cameraCard {
+    width: 47%;
+    margin: 20px auto;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #mainContent {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .cameraCard {
+    width: 30%;
+    margin: 20px auto;
+  }
+}

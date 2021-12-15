@@ -19,13 +19,15 @@ export class Cart {
     }
     
 
-    static addItem(item) {   // fonction qui ajoute un article dans le panier       
+     // fonction qui ajoute un article dans le panier
+    static addItem(item) {         
         let cart = new Cart;
         let cartArray = cart.getItems()
         cartArray.push(item); 
-        initCart(cartArray);    
+        Cart.initCart(cartArray);    
     }
 
+    //fonction qui verifie si les deux articles sont identiques et ajoute une quantité
     static addSameItem(item) {
         let cart = new Cart;
         let cartArray = cart.getItems()
@@ -34,19 +36,40 @@ export class Cart {
             item._id === camera._id &&   //l'id et la lentille sont identiques
             item.lense === camera.lense
           ) {
-            camera.cameraCount++;    //si oui on va ajouter une quantité 
-            Cart.initCart(cartArray);   //et le renvoyer dans le localStorage
+            Cart.addQuantity(camera, cartArray)
             return 1;
           }
         }  
     }
 
-    removeItem(item) {
-        // fonction to remove an item from cart
+    static addQuantity(item, array){
+        item.cameraCount++;
+        Cart.initCart(array);
     }
 
+    static removeQuantity(item, array){
+        item.cameraCount--;
+        Cart.initCart(array);
+    }
+
+    // ----fonction qui va enlever une quantité du panier
+    static removeItem(item, array) {
+        if (item.cameraCount == 1) {
+            let index = array.indexOf(item);
+            if (index > -1 && array.length > 1) {
+              array.splice(index, 1);
+              Cart.initCart(array);
+              window.location.reload();
+            } else if (index > -1 && array.length == 1) {
+              window.localStorage.clear();
+              window.location.reload();
+            }
+          } else {
+            Cart.removeQuantity(item, array);}
+    }
+
+    //------ fonction qui va calculer la somme des articles    
     static getTotalValue() {
-        // fonction qui va calculer la somme des articles
         let cart = new Cart;
         let cartArray = cart.getItems();        
         let priceArray = [];
@@ -58,6 +81,7 @@ export class Cart {
         });    
     }
     
+    //fonction qui va vider le panier
     static cleanCart(){
         window.localStorage.clear();
         window.location.reload();

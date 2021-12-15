@@ -1,18 +1,18 @@
-#imageHere{
-    width: 100%;
-    max-width: 900px;
-    margin: 25px auto;
+#imageHere {
+  width: 100%;
+  max-width: 900px;
+  margin: 25px auto;
 }
 
-#priceHere{
-    font-weight: 800;
+#priceHere {
+  font-weight: 800;
 }
 
-#addToCart{
-    margin-top: 20px;    
+#addToCart {
+  margin-top: 20px;
 }
 
 section {
-    margin: 25px auto;
-    width: 90%;
+  width: 100%;
+  text-align: center;
 }

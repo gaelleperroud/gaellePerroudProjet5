@@ -1,67 +1,37 @@
-h1{
-    font-family: "Caveat Brush", cursive;
+h1 {
+  font-family: "Caveat Brush", cursive;
 }
 
-body{
-    font-family: "roboto", sans-serif;
+body {
+  font-family: "roboto", sans-serif;
 }
 
-a{
-    color: #343A40;
+a {
+  color: #343a40;
 }
 
 a:hover {
-    color: #343A40;
-    text-decoration: none;
+  color: #343a40;
+  text-decoration: none;
 }
 
-.nav-item:hover{
-    text-decoration: underline;
+.navbar {
+  padding: 0.5rem 0;
 }
 
-.list-group-item{
-    border: none;
+.nav-item:hover {
+  text-decoration: underline;
 }
 
-.list-group-item{
-    background-color: #343a40;
-    color: #fff;
+.list-group-item {
+  border: none;
 }
 
-.list-group-item a{
-    color: #fff;
+.list-group-item {
+  background-color: #343a40;
+  color: #fff;
 }
 
-.cameraCard{
-    margin: 35px auto;
-    width: 85%;
-    height: 420px;
-    border: 4px #007bff  solid;
-    border-radius: 25px; 
-}
-
-.cameraCard img{
-    height: 350px;
-    
-    border-radius: 20px 20px 0 0;   
-}
-
-.cameraCard button{
-    border-radius: 40px;
-    margin-top: 10px; 
-    height: 40px;
-    min-width: 135px;   
-}
-
-.cameraCard h2{
-    margin-top: 10px;
-}
-
-.cameraCard h2:hover{
-    text-decoration: underline;
-}
-
-.cameraCard a{
-    width: 100%;
-    padding-left: 15px;
+.list-group-item a {
+  color: #fff;
 }
