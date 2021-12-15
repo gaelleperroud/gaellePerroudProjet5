@@ -1,7 +1,5 @@
 import { getOneCamera } from "./api.js";
-import { initStorage } from "./storage.js";
-import { sameItemInCart } from "./storage.js";
-import { addNewItemInCart } from "./storage.js";
+import { Cart } from "./cart.js";
 
 //-----fonction asynchrone de requete a l'api----------------------------------
 async function loadCamera() {
@@ -20,7 +18,7 @@ function displayOneCamera(camera) {
   let desc = document.getElementById("descriptionHere");
   desc.textContent = camera.description;
   let price = document.getElementById("priceHere");
-  price.textContent = camera.price / 100 + " €";
+  price.textContent = camera.getFormatedPrice() + " €";
   lensesDisplay(camera.lenses);
 }
 
@@ -40,13 +38,13 @@ function addToCart(camera) {
   camera.cameraCount = 1;
   if (localStorage.length === 0) {
     //si le localStorage est vide on initie le localStorage
-    initStorage([camera]);
-  } else if (sameItemInCart(camera) == 1) {
+    Cart.initCart([camera]);
+  } else if (Cart.addSameItem(camera) == 1) {
     //si deux articles identiques,ajoute une quantité
     console.log("deux articles identiques");
   } else {
     //sinon on ajoute un article au localStorage
-    addNewItemInCart(camera);
+    Cart.addItem(camera);
   }
 }
 

@@ -86,4 +86,12 @@ h2{
     margin: 10px 55px;
 }
 
+#sendButton{
+    margin: 25px auto;
+}
+
+#orderButton{
+    text-align: center;
+}
+
 

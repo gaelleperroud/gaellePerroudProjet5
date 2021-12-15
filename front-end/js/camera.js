@@ -6,6 +6,12 @@ class Camera{            //Création de la classe Camera avec un constructeur
         this.imageUrl = imageUrl;
         this.price = price;
         this.lenses = lenses;   
-    }    
+    } 
+    
+    getFormatedPrice(){
+        console.log(this.price);
+        return this.price/100;
+    }
+
 };
 export {Camera};
