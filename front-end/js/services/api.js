@@ -1,14 +1,12 @@
-import { Camera } from "./camera.js";
+import { Camera } from "../classes/camera.js";
 
 //------fonction qui envoie une requete au serveur de la liste des caméras a afficher-------
 export function getAllCameras() {
   return fetch("http://localhost:3000/api/cameras")
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .then((value) => {
-      //on effectue une boucle for..of
       let cameraList = [];
       for (let camera of value) {
         // on crée une nouvelle instance de la classe a chaque boucle
@@ -27,7 +25,7 @@ export function getAllCameras() {
     })
     .catch(function (err) {
       // fonction catch en cas d'erreur
-      console.log(err);
+      alert(err);
     });
 }
 
@@ -36,7 +34,6 @@ export function getAllCameras() {
 export function getOneCamera(id) {
   return fetch("http://localhost:3000/api/cameras/" + id)
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .then((value) => {
@@ -53,7 +50,7 @@ export function getOneCamera(id) {
     })
     .catch(function (err) {
       // fonction catch en cas d'erreur
-      console.log(err);
+      alert(err);
     });
 }
 
@@ -69,7 +66,6 @@ export function sendOrder(data) {
     body: JSON.stringify(data), //on envoie nos données en format json
   })
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .then((value) => {
@@ -79,6 +75,6 @@ export function sendOrder(data) {
     })
     .catch(function (err) {
       // fonction catch en cas d'erreur
-      console.log(err);
+      alert(err);
     });
 }

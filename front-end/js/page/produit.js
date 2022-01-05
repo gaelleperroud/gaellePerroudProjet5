@@ -1,5 +1,5 @@
-import { getOneCamera } from "./api.js";
-import { Cart } from "./cart.js";
+import { getOneCamera } from "../services/api.js";
+import { Cart } from "../classes/Cart.js";
 
 //-----fonction asynchrone de requete a l'api----------------------------------
 async function loadCamera() {
@@ -38,14 +38,11 @@ function addToCart(camera) {
   camera.cameraCount = 1;
   if (localStorage.length === 0) {
     //si le localStorage est vide on initie le localStorage
-    Cart.initCart([camera]);
-  } else if (Cart.addSameItem(camera) == 1) {
-    //si deux articles identiques,ajoute une quantité
-    console.log("deux articles identiques");
+    Cart.getInstance().update([camera]);
   } else {
-    //sinon on ajoute un article au localStorage
-    Cart.addItem(camera);
+    Cart.getInstance().addItem(camera);
   }
+  window.location.href = "panier.html";
 }
 
 //-------------fonction principale.. -------------------------

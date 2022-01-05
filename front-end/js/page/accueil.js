@@ -1,4 +1,4 @@
-import { getAllCameras } from "./api.js";
+import { getAllCameras } from "../services/api.js";
 
 //--fonction asynchrone qui va envoyer une requete a l'api pour toutes les caméras-------------
 async function loadCameras() {

@@ -1,6 +1,6 @@
-import { Cart } from "./cart.js";
-import { sendOrder } from "./api.js";
-import { testForm } from "./regex.js";
+import { Cart } from "../classes/Cart.js";
+import { sendOrder } from "../services/api.js";
+import { testForm } from "../services/regex.js";
 
 function displayStorage() {
   if (localStorage.length === 0) {
@@ -9,8 +9,7 @@ function displayStorage() {
   }
   //sinon on va afficher le panier ainsi qu'un bouton pour le vider et la somme du panier
   else {
-    let cart = new Cart();
-    let cartArray = cart.getItems();
+    let cartArray = Cart.getInstance().getItems();
     for (let i = 0; i < cartArray.length; i++) {
       let camera = cartArray[i];
       displayCart(camera, cartArray);
@@ -32,21 +31,27 @@ function emptyCartDisplay() {
 function createTotalPrice() {
   let sum = document.createElement("p");
   document.getElementById("cartTools").appendChild(sum);
-  let totalSum = Cart.getTotalValue();
-  console.log(totalSum);
+  updateTotalPrice();
+}
+
+function updateTotalPrice() {
+  let sum = document.querySelector("#cartTools p");
+  let totalSum = Cart.getInstance().getTotalValue();
   sum.innerHTML = "Montant du panier : " + totalSum + " €";
 }
 
 //---fonction qui va enlever un article de la quantité et modifier l'affichage-----------
-function removeItem(camera, array) {
-  Cart.removeItem(camera, array);
+function removeItemAndDisplay(camera, array) {
+  Cart.getInstance().removeItem(camera, array);
   updateCardBottom(camera, array);
+  updateTotalPrice();
 }
 
 //---fonction qui va ajouter un article de la quantité et modifier l'affichege-----------
-function addItem(camera, array) {
-  Cart.addQuantity(camera, array);
+function addItemAndDisplay(camera, array) {
+  Cart.getInstance().addItem(camera);
   updateCardBottom(camera, array);
+  updateTotalPrice();
 }
 
 //----fonction qui va modifier la quantité et modifier l'affichage----------------
@@ -57,7 +62,7 @@ function updateCardBottom(camera, array) {
   quantity[index].textContent = "quantité : " + camera.cameraCount;
   price[index].textContent =
     "Prix total : " +
-    Cart.formatedPrice(camera.price) * camera.cameraCount +
+    Cart.getInstance().formatedPrice(camera.price) * camera.cameraCount +
     " €";
 }
 
@@ -80,7 +85,7 @@ function createCardHeader(camera) {
   title.innerHTML = camera.name;
   cardHeader.appendChild(title);
   let price = document.createElement("p");
-  price.textContent = Cart.formatedPrice(camera.price) + " €";
+  price.textContent = Cart.getInstance().formatedPrice(camera.price) + " €";
   cardHeader.appendChild(price);
   return cardHeader;
 }
@@ -118,11 +123,13 @@ function createCardBottom(camera, array) {
   totalPricePerItem.classList.add("totalPricePerItem");
   totalPricePerItem.textContent =
     "Prix total : " +
-    Cart.formatedPrice(camera.price) * camera.cameraCount +
+    Cart.getInstance().formatedPrice(camera.price) * camera.cameraCount +
     " €";
   cardContent.appendChild(totalPricePerItem);
-  removeButton.addEventListener("click", () => removeItem(camera, array));
-  addButton.addEventListener("click", () => addItem(camera, array));
+  removeButton.addEventListener("click", () =>
+    removeItemAndDisplay(camera, array)
+  );
+  addButton.addEventListener("click", () => addItemAndDisplay(camera, array));
   return cardContent;
 }
 
@@ -143,7 +150,7 @@ function cleanCart() {
   document.getElementById("cartTools").appendChild(cleanButton);
   cleanButton.classList.add("bg-primary");
   cleanButton.textContent = "Vider le panier";
-  cleanButton.addEventListener("click", () => Cart.cleanCart());
+  cleanButton.addEventListener("click", () => Cart.getInstance().cleanCart());
 }
 
 //fonction qui apres avoir les données de l'api va vider le panier et envoyer l'utilisateur sur
@@ -175,14 +182,13 @@ function activateSendButton() {
   let button = document.getElementById("sendButton");
   button.addEventListener("click", (e) => {
     e.preventDefault();
-    let error = testForm();
+    let error = testForm(); //fonction importée depuis la page regex.js
     if (error.length !== 0) {
       alert(error);
     } else {
       let contact = getFormData();
       let products = [];
-      let cart = new Cart();
-      let storage = cart.getItems();
+      let storage = Cart.getInstance().getItems();
       storage.forEach((camera) => {
         let cameraIdToSend = camera._id;
         products.push(cameraIdToSend);
